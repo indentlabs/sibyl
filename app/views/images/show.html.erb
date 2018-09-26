@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @image.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @image.description %>
+</p>
+
+<p>
+  <strong>Bucket:</strong>
+  <%= @image.bucket %>
+</p>
+
+<p>
+  <strong>Filename:</strong>
+  <%= @image.filename %>
+</p>
+
+<p>
+  <strong>License:</strong>
+  <%= @image.license %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @image.author %>
+</p>
+
+<p>
+  <strong>Source url:</strong>
+  <%= @image.source_url %>
+</p>
+
+<%= link_to 'Edit', edit_image_path(@image) %> |
+<%= link_to 'Back', images_path %>
