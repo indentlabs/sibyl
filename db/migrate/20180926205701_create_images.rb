@@ -3,11 +3,12 @@ class CreateImages < ActiveRecord::Migration[5.2]
     create_table :images do |t|
       t.string :title
       t.string :description
-      t.string :bucket
-      t.string :filename
       t.string :license
-      t.string :author
-      t.string :source_url
+      t.string :author_name
+      t.string :author_url
+      t.string :raw_source_url
+      t.string :thumb_source_url
+      t.string :page_source_url
 
       t.timestamps
     end
