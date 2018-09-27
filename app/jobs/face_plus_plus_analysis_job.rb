@@ -3,7 +3,6 @@ class FacePlusPlusAnalysisJob < ApplicationJob
 
   FPP_ANALYSIS_SOURCE_KEY = 'faceplusplus'
   FPP_DETECT_ENDPOINT  = 'https://api-us.faceplusplus.com/facepp/v3/detect'
-  FPP_ANALYZE_ENDPOINT = ''
 
   def perform(*images)
     require 'net/https'

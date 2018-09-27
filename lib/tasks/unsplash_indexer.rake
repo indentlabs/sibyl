@@ -10,6 +10,7 @@ namespace :unsplash do
       created_image.raw_source_width  = image_result.width
       created_image.raw_source_height = image_result.height
       created_image.thumb_source_url  = image_result.urls.thumb
+      created_image.medium_source_url = image_result.urls.regular
       created_image.page_source_url   = image_result.links.html
       created_image.title             = image_result.title
       created_image.description       = image_result.description
