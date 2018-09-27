@@ -59,6 +59,10 @@ class AzureFaceAnalysisJob < ApplicationJob
     case value
     when 'NoGlasses'
       'no glasses'
+    when 'ReadingGlasses'
+      'glasses'
+    when 'Sunglasses'
+      'sunglasses'
     else
       value.downcase
     end
