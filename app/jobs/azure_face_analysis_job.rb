@@ -60,20 +60,20 @@ class AzureFaceAnalysisJob < ApplicationJob
     when 'NoGlasses'
       'no glasses'
     else
-      value
+      value.downcase
     end
   end
 
   def hair_hash_to_key(hair_hash)
-    if hair_hash.fetch('bald', 0) > 0.75 # accuracy
+    if hair_hash.fetch('bald', 0) >= 0.3 # accuracy
       ['bald', 'bald']
     else
       hair_length = case hair_hash.fetch('bald', nil)
       when 0..0.1
         'long'
-      when 0.1..0.3
+      when 0.1..0.2
         'medium'
-      when 0.4..8
+      when 0.2..3
         'short'
       end
 
