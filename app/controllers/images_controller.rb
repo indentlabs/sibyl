@@ -23,7 +23,7 @@ class ImagesController < ApplicationController
         when 'senior'
           matched_image_ids.where('age >= 60')
         else
-          matched_image_ids.where('age != NULL')
+          matched_image_ids
         end
       end
 
