@@ -4,7 +4,25 @@ class ImagesController < ApplicationController
   # GET /images
   # GET /images.json
   def index
-    @images = Image.all
+    search_map = Hash[search_params.keys.zip(search_params.values)].except('age')
+    matched_image_ids = CharacterImageQuality.where(search_map)
+    if search_params.key?('age')
+      matched_image_ids = case search_params['age']
+      when 'baby'
+        matched_image_ids.where('age < 3')
+      when 'child'
+        matched_image_ids.where('age >= 3 AND age < 18')
+      when 'young_adult'
+        matched_image_ids.where('age >= 18 AND age < 25')
+      when 'adult'
+        matched_image_ids.where('age >= 25 AND age < 60')
+      when 'senior'
+        matched_image_ids.where('age >= 60')
+      else
+      end
+    end
+
+    @images = Image.where(id: matched_image_ids.pluck(:image_id)).includes(:character_image_qualities)
   end
 
   # GET /images/1
@@ -62,13 +80,18 @@ class ImagesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_image
-      @image = Image.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def image_params
-      params.require(:image).permit(:title, :description, :bucket, :filename, :license, :author, :source_url)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_image
+    @image = Image.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def image_params
+    params.require(:image).permit(:title, :description, :bucket, :filename, :license, :author, :source_url)
+  end
+
+  def search_params
+    params.permit(:skin_tone, :gender, :age, :glasses)
+  end
 end

@@ -6,4 +6,9 @@ class Image < ApplicationRecord
     FacePlusPlusAnalysisJob.perform_later(self)
     # todo other analysis APIs
   end
+
+  def merged_character_image_qualities
+    # todo
+    character_image_qualities.first
+  end
 end

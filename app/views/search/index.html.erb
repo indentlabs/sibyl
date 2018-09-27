@@ -1,0 +1,54 @@
+<form method="GET" action="<%= images_path %>">
+  Search type:
+  <select name="image_type" disabled="disabled">
+    <option value="people">People</option>
+    <option value="places">Places</option>
+    <option value="things">Things</option>
+  </select>
+  <hr />
+  Show me
+  <select name="skin_tone">
+    <option value="">any ethnicity</option>
+    <% CharacterImageQuality.pluck(:skin_tone).uniq.each do |skin_tone| %>
+      <option value="<%= skin_tone %>"><%= skin_tone %></option>
+    <% end %>
+  </select>
+  <select name="gender">
+    <option value="">any gender</option>
+    <% CharacterImageQuality.pluck(:gender).uniq.each do |gender| %>
+      <option value="<%= gender %>"><%= gender %></option>
+    <% end %>
+  </select>
+  <select name="age">
+    <option value="">any age</option>
+    <option value="baby">babies</option>
+    <option value="child">children</option>
+    <option value="young_adult">young adults</option>
+    <option value="adult">adults</option>
+    <option value="senior">seniors</option>
+  </select>
+  with
+  <select name="glasses">
+    <option value="">any accessory</option>
+    <% CharacterImageQuality.pluck(:glasses).uniq.each do |glasses| %>
+      <option value="<%= glasses %>"><%= glasses %></option>
+    <% end %>
+  </select>
+  and
+  <select name="hair_length" disabled="disabled">
+    <option value="">any length</option>
+    <% CharacterImageQuality.pluck(:hair_length).uniq.each do |hair_length| %>
+      <option value="<%= hair_length %>"><%= hair_length %></option>
+    <% end %>
+  </select>
+  <select name="hair_color" disabled="disabled">
+    <option value="">any color</option>
+    <% CharacterImageQuality.pluck(:hair_color).uniq.each do |hair_color| %>
+      <option value="<%= hair_color %>"><%= hair_color %></option>
+    <% end %>
+  </select>
+  hair.
+
+  <br /><br />
+  <input type="submit" value="Search" />
+</form>

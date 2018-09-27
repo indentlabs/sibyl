@@ -19,7 +19,7 @@ class FacePlusPlusAnalysisJob < ApplicationJob
       request.form_data = {
         'api_key'           => ENV['FPP_API_KEY'],
         'api_secret'        => ENV['FPP_API_SECRET'],
-        'image_url'         => image.thumb_source_url,
+        'image_url'         => image_format_to_use(image),
         'return_landmark'   => 0,
         'return_attributes' => [
           'gender',
@@ -48,7 +48,7 @@ class FacePlusPlusAnalysisJob < ApplicationJob
           analysis_source: FPP_ANALYSIS_SOURCE_KEY,
           gender:          face_attributes.fetch('gender',    {}).fetch('value', nil).try(:downcase),
           skin_tone:       face_attributes.fetch('ethnicity', {}).fetch('value', nil).try(:downcase),
-          age:             face_attributes.fetch('age',       {}).fetch('value', nil).try(:downcase),
+          age:             face_attributes.fetch('age',       {}).fetch('value', nil),
           glasses:         eyestatus_hash_to_key(face_attributes.fetch('eyestatus', {}))
         )
       end
@@ -91,5 +91,19 @@ class FacePlusPlusAnalysisJob < ApplicationJob
     else
       nil
     end
+  end
+
+  def image_format_to_use
+    return image.thumb_source_url if image.raw_source_height.nil? || image.raw_source_width.nil?
+
+    # If we can use the full-size original image, we should.
+    if image.raw_source_height > 48 && image.raw_source_height <= 4096
+      if image.raw_source_width > 48 && image.raw_source_width <= 4096
+        return image.raw_source_url
+      end
+    end
+
+    # Otherwise, fall back on a thumbnail.
+    image.thumb_source_url
   end
 end
