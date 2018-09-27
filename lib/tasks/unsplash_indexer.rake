@@ -5,7 +5,6 @@ namespace :unsplash do
     search_results = Unsplash::Photo.search(search_query)
 
     puts "Searching for images with query #{search_query}"
-    require 'pry'
     search_results.each do |image_result|
       created_image = Image.find_or_initialize_by(raw_source_url: image_result.urls.raw)
       created_image.raw_source_width  = image.width
