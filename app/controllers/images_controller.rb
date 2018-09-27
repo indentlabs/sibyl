@@ -4,12 +4,12 @@ class ImagesController < ApplicationController
   # GET /images
   # GET /images.json
   def index
-    search_map = Hash[search_params.keys.zip(search_params.values)].except('age').reject { |k, v| !v.present?}
+    search_map = Hash[search_params.keys.zip(search_params.values)].reject { |k, v| !v.present?}
 
     if search_map == {}
       @images = Image.all.includes(:character_image_qualities)
     else
-      matched_image_ids = CharacterImageQuality.where(search_map)
+      matched_image_ids = CharacterImageQuality.where(search_map.except('age'))
       if search_params.key?('age')
         matched_image_ids = case search_params['age']
         when 'baby'
@@ -23,6 +23,7 @@ class ImagesController < ApplicationController
         when 'senior'
           matched_image_ids.where('age >= 60')
         else
+          matched_image_ids.where('age NOT NULL')
         end
       end
 
