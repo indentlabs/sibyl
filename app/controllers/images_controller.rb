@@ -15,7 +15,9 @@ class ImagesController < ApplicationController
         when 'baby'
           matched_image_ids.where('age < 3')
         when 'child'
-          matched_image_ids.where('age >= 3 AND age < 18')
+          matched_image_ids.where('age >= 3 AND age < 13')
+        when 'teenager'
+          matched_image_ids.where('age >= 13 AND age < 20')
         when 'young_adult'
           matched_image_ids.where('age >= 18 AND age < 25')
         when 'adult'
