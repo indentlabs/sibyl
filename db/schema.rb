@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 2018_09_26_205744) do
     t.string "hair_color"
     t.string "hair_length"
     t.integer "age"
+    t.string "glasses"
+    t.string "analysis_source"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["image_id"], name: "index_character_image_qualities_on_image_id"

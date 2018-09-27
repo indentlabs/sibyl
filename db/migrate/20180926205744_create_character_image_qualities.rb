@@ -7,6 +7,8 @@ class CreateCharacterImageQualities < ActiveRecord::Migration[5.2]
       t.string :hair_color
       t.string :hair_length
       t.integer :age
+      t.string :glasses
+      t.string :analysis_source
 
       t.timestamps
     end

@@ -3,6 +3,7 @@ class Image < ApplicationRecord
 
   after_create :queue_image_analysis_job
   def queue_image_analysis_job
-    # todo pipe through some image ai
+    FacePlusPlusAnalysisJob.perform_later(self)
+    # todo other analysis APIs
   end
 end
