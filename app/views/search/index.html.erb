@@ -42,7 +42,7 @@
       <option value="<%= hair_length %>"><%= hair_length %></option>
     <% end %>
   </select>
-  <select name="hair_color" disabled="disabled">
+  <select name="hair_color">
     <option value="">any color</option>
     <% CharacterImageQuality.pluck(:hair_color).uniq.each do |hair_color| %>
       <option value="<%= hair_color %>"><%= hair_color %></option>

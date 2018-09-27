@@ -27,7 +27,7 @@
     <tbody>
       <% @images.each do |image| %>
         <tr>
-          <td><%= image.title %></td>
+          <td><%= image.title || image.id %></td>
           <td><%= image.description %></td>
           <td>
             <%= link_to image.raw_source_url do %>
@@ -39,7 +39,7 @@
           <td><%= link_to image.author_name, image.author_url %></td>
           <td>
             <% %w(gender skin_tone hair_color hair_length age glasses).each do |attr| %>
-              <% value = image.merged_character_image_qualities.send(attr) %>
+              <% value = image.merged_character_image_qualities.fetch(attr, nil) %>
               <% next unless value.present? %>
 
               <div><%= attr.titleize %>: <%= value %></div>

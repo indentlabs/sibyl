@@ -31,6 +31,7 @@ class AzureFaceAnalysisJob < ApplicationJob
 
       image.character_image_qualities.where(analysis_source: AF_ANALYSIS_SOURCE_KEY).destroy_all
 
+      puts response_json.to_yaml
       if response_json.is_a?(Array)
         response_json.each do |face_data|
           face_attributes = face_data.fetch('faceAttributes', {})
@@ -68,7 +69,7 @@ class AzureFaceAnalysisJob < ApplicationJob
       ['bald', 'bald']
     else
       hair_length = nil # todo
-      hair_color  = hair_hash.fetch('hairColor', []).sort_by { |c| c['confidence'] }.last.fetch('color', nil)
+      hair_color  = (hair_hash.fetch('hairColor', []).sort_by { |c| c['confidence'] }.last || {}).fetch('color', nil)
 
       return [hair_length, hair_color]
     end
