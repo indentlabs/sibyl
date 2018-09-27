@@ -65,13 +65,21 @@ class AzureFaceAnalysisJob < ApplicationJob
   end
 
   def hair_hash_to_key(hair_hash)
-    if hair_hash.fetch('bald', 0) > 75 # accuracy
+    if hair_hash.fetch('bald', 0) > 0.75 # accuracy
       ['bald', 'bald']
     else
-      hair_length = nil # todo
+      hair_length = case hair_hash.fetch('bald', nil)
+      when 0..0.1
+        'long'
+      when 0.1..0.3
+        'medium'
+      when 0.4..8
+        'short'
+      end
+
       hair_color  = (hair_hash.fetch('hairColor', []).sort_by { |c| c['confidence'] }.last || {}).fetch('color', nil)
 
-      return [hair_length, hair_color]
+      [hair_length, hair_color]
     end
   end
 end
