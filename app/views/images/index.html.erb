@@ -22,7 +22,8 @@
         <td>
           <%= link_to image.raw_source_url do %>
             <%= image_tag image.thumb_source_url %>
-          <% end %>
+          <% end %><br />
+          <%= image.raw_source_width || '?' %>x<%= image.raw_source_height || '?' %>
         </td>
         <td>License: <%= image.license %></td>
         <td><%= link_to image.author_name, image.author_url %></td>

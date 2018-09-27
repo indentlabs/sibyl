@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(version: 2018_09_26_205744) do
     t.string "author_name"
     t.string "author_url"
     t.string "raw_source_url"
+    t.string "raw_source_height"
+    t.string "raw_source_width"
     t.string "thumb_source_url"
     t.string "page_source_url"
     t.datetime "created_at", null: false
