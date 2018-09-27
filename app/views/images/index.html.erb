@@ -1,41 +1,47 @@
+<%= link_to 'Search again', root_path %><hr />
+
 <p id="notice"><%= notice %></p>
 
 <h1>Images</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Image</th>
-      <th>License</th>
-      <th>Author</th>
-      <th>Appearance</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @images.each do |image| %>
+<% if @images.any? %>
+  <table>
+    <thead>
       <tr>
-        <td><%= image.title %></td>
-        <td><%= image.description %></td>
-        <td>
-          <%= link_to image.raw_source_url do %>
-            <%= image_tag image.thumb_source_url %>
-          <% end %><br />
-          <%= image.raw_source_width || '?' %>x<%= image.raw_source_height || '?' %>
-        </td>
-        <td>License: <%= image.license %></td>
-        <td><%= link_to image.author_name, image.author_url %></td>
-        <td>
-          <% %w(gender skin_tone hair_color hair_length age glasses).each do |attr| %>
-            <% value = image.merged_character_image_qualities.send(attr) %>
-            <% next unless value.present? %>
-
-            <div><%= attr.titleize %>: <%= value %></div>
-          <% end %>
-        </td>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Image</th>
+        <th>License</th>
+        <th>Author</th>
+        <th>Appearance</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @images.each do |image| %>
+        <tr>
+          <td><%= image.title %></td>
+          <td><%= image.description %></td>
+          <td>
+            <%= link_to image.raw_source_url do %>
+              <%= image_tag image.thumb_source_url %>
+            <% end %><br />
+            <%= image.raw_source_width || '?' %>x<%= image.raw_source_height || '?' %>
+          </td>
+          <td>License: <%= image.license %></td>
+          <td><%= link_to image.author_name, image.author_url %></td>
+          <td>
+            <% %w(gender skin_tone hair_color hair_length age glasses).each do |attr| %>
+              <% value = image.merged_character_image_qualities.send(attr) %>
+              <% next unless value.present? %>
+
+              <div><%= attr.titleize %>: <%= value %></div>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  No images found with these aesthetics. 
+<% end %>
