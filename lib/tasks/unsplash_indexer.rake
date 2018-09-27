@@ -1,8 +1,10 @@
 namespace :unsplash do
   desc "Index more images from Unsplash"
   task index: :environment do
-    search_results = Unsplash::Photo.search("person")
+    search_query = ENV['search_query'] || 'person'
+    search_results = Unsplash::Photo.search(search_query)
 
+    puts "Searching for images with query #{search_query}"
     search_results.each do |image_result|
       created_image = Image.find_or_initialize_by(raw_source_url: image_result.urls.raw)
       created_image.thumb_source_url = image_result.urls.thumb
