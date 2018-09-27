@@ -92,7 +92,7 @@ class FacePlusPlusAnalysisJob < ApplicationJob
     end
   end
 
-  def image_format_to_use
+  def image_format_to_use(image)
     return image.thumb_source_url if image.raw_source_height.nil? || image.raw_source_width.nil?
 
     # If we can use the full-size original image, we should.
