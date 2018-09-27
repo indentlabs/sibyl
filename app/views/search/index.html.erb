@@ -36,7 +36,7 @@
     <% end %>
   </select>
   and
-  <select name="hair_length" disabled="disabled">
+  <select name="hair_length">
     <option value="">any length</option>
     <% CharacterImageQuality.pluck(:hair_length).uniq.compact.each do |hair_length| %>
       <option value="<%= hair_length %>"><%= hair_length %></option>
