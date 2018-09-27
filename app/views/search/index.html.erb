@@ -9,13 +9,13 @@
   Show me
   <select name="skin_tone">
     <option value="">any ethnicity</option>
-    <% CharacterImageQuality.pluck(:skin_tone).uniq.each do |skin_tone| %>
+    <% CharacterImageQuality.pluck(:skin_tone).uniq.compact.each do |skin_tone| %>
       <option value="<%= skin_tone %>"><%= skin_tone %></option>
     <% end %>
   </select>
   <select name="gender">
     <option value="">any gender</option>
-    <% CharacterImageQuality.pluck(:gender).uniq.each do |gender| %>
+    <% CharacterImageQuality.pluck(:gender).uniq.compact.each do |gender| %>
       <option value="<%= gender %>"><%= gender %></option>
     <% end %>
   </select>
@@ -31,20 +31,20 @@
   with
   <select name="glasses">
     <option value="">any accessory</option>
-    <% CharacterImageQuality.pluck(:glasses).uniq.each do |glasses| %>
+    <% CharacterImageQuality.pluck(:glasses).uniq.compact.each do |glasses| %>
       <option value="<%= glasses %>"><%= glasses %></option>
     <% end %>
   </select>
   and
   <select name="hair_length" disabled="disabled">
     <option value="">any length</option>
-    <% CharacterImageQuality.pluck(:hair_length).uniq.each do |hair_length| %>
+    <% CharacterImageQuality.pluck(:hair_length).uniq.compact.each do |hair_length| %>
       <option value="<%= hair_length %>"><%= hair_length %></option>
     <% end %>
   </select>
   <select name="hair_color">
     <option value="">any color</option>
-    <% CharacterImageQuality.pluck(:hair_color).uniq.each do |hair_color| %>
+    <% CharacterImageQuality.pluck(:hair_color).uniq.compact.each do |hair_color| %>
       <option value="<%= hair_color %>"><%= hair_color %></option>
     <% end %>
   </select>
