@@ -5,4 +5,5 @@ namespace :daily do
       image.queue_image_analysis_jobs
       sleep(15)
     end
+  end
 end
