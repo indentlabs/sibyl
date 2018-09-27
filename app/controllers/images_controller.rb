@@ -4,25 +4,30 @@ class ImagesController < ApplicationController
   # GET /images
   # GET /images.json
   def index
-    search_map = Hash[search_params.keys.zip(search_params.values)].except('age')
-    matched_image_ids = CharacterImageQuality.where(search_map)
-    if search_params.key?('age')
-      matched_image_ids = case search_params['age']
-      when 'baby'
-        matched_image_ids.where('age < 3')
-      when 'child'
-        matched_image_ids.where('age >= 3 AND age < 18')
-      when 'young_adult'
-        matched_image_ids.where('age >= 18 AND age < 25')
-      when 'adult'
-        matched_image_ids.where('age >= 25 AND age < 60')
-      when 'senior'
-        matched_image_ids.where('age >= 60')
-      else
-      end
-    end
+    search_map = Hash[search_params.keys.zip(search_params.values)].except('age').reject { |k, v| !v.present?}
 
-    @images = Image.where(id: matched_image_ids.pluck(:image_id)).includes(:character_image_qualities)
+    if search_map == {}
+      @images = Image.all.includes(:character_image_qualities)
+    else
+      matched_image_ids = CharacterImageQuality.where(search_map)
+      if search_params.key?('age')
+        matched_image_ids = case search_params['age']
+        when 'baby'
+          matched_image_ids.where('age < 3')
+        when 'child'
+          matched_image_ids.where('age >= 3 AND age < 18')
+        when 'young_adult'
+          matched_image_ids.where('age >= 18 AND age < 25')
+        when 'adult'
+          matched_image_ids.where('age >= 25 AND age < 60')
+        when 'senior'
+          matched_image_ids.where('age >= 60')
+        else
+        end
+      end
+
+      @images = Image.where(id: matched_image_ids.pluck(:image_id)).includes(:character_image_qualities)
+    end
   end
 
   # GET /images/1

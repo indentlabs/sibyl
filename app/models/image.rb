@@ -9,6 +9,6 @@ class Image < ApplicationRecord
 
   def merged_character_image_qualities
     # todo
-    character_image_qualities.first
+    character_image_qualities.first || CharacterImageQuality.new
   end
 end
