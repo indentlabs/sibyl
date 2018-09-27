@@ -8,7 +8,6 @@ class FacePlusPlusAnalysisJob < ApplicationJob
   def perform(*images)
     require 'net/https'
     require 'open-uri'
-    require 'pry'
 
     images.each do |image|
       # todo ensure image.raw_source_url size is betwen 48x48 and 4096x4096
