@@ -1,0 +1,39 @@
+<div class="d hx hf gu gallery-item gallery-expand ce polygon">
+  <div class="gallery-curve-wrapper">
+    <a class="gallery-cover gray">
+      <%= image_tag image.thumb_source_url, class: 'responsive-img', alt: image.description %>
+    </a>
+    <div class="gallery-header">
+      <span>
+        <%= image.title || image.description %>
+      </span>
+    </div>
+    <div class="gallery-body">
+      <div class="title-wrapper">
+        <h3><%= image.title %></h3>
+        <h4><%= image.description %></h4>
+        <span class="gj">by <%= link_to image.author_name, image.author_url %></span>
+      </div>
+      <div style="height:60px;"></div>
+      <p class="fi">
+        License: <%= image.license %>
+      </p>
+      <% %w(gender skin_tone hair_color hair_length age glasses).each do |attr| %>
+        <% value = image.character_image_qualities.pluck(attr).compact.to_sentence %>
+        <% next unless value.present? %>
+
+        <p class="fi"><%= attr.titleize %>: <%= value %></p>
+      <% end %>
+
+      <h5 style="text-align: center">View full-size image</h5>
+      <div style="overflow: hidden">
+        <%= link_to image.raw_source_url, class: 'carousel-item', target: '_new' do %>
+          <%= image_tag image.medium_source_url || image.thumb_source_url %>
+        <% end %>
+      </div>
+    </div>
+    <div class="gallery-action">
+      <a class="btn-floating btn-large waves-effect waves-light"><i class="material-icons">favorite</i></a>
+    </div>
+  </div>
+</div>

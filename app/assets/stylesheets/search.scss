@@ -1,3 +1,14 @@
-// Place all the styles related to the Search controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.search-form {
+  .select-dropdown.dropdown-trigger {
+    display: inline;
+    width: inherit;
+  }
+
+  .select-wrapper {
+    display: inline;
+  }
+
+  .dropdown-content.select-dropdown {
+    left: 0;
+  }
+}
