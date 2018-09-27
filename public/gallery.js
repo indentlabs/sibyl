@@ -1480,9 +1480,7 @@ var MMCQ = function() {
                         a(this).css({
                             backgroundColor: z
                         })
-                    })), B = Materialize.throttle(function() {
-                        da()
-                    }, 150), a(window).resize(B), C = setTimeout(function() {
+                    })), B = {}, a(window).resize(B), C = setTimeout(function() {
                         P.length && P.find(U).each(function() {
                             a(this).addClass("k")
                         });
