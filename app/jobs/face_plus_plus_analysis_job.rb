@@ -99,8 +99,8 @@ class FacePlusPlusAnalysisJob < ApplicationJob
     width  = image.raw_source_width.to_i
 
     # If we can use the full-size original image, we should.
-    if height >= 48 && height <= 4096
-      if width >= 48 && width <= 4096
+    if height >= 48 && height <= 2000
+      if width >= 48 && width <= 2000
         return image.raw_source_url
       end
     end

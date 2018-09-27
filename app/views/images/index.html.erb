@@ -1,4 +1,11 @@
-<%= link_to 'Search again', root_path %><hr />
+<%= link_to 'Search again', root_path %>
+
+<% (params.keys - ["controller", "action"]).each do |param| %>
+  <% next if params[param].empty? %>
+  <%= link_to "[Remove #{param}: #{params[param]}]", params.permit!.except(param) %>
+<% end %>
+
+<hr />
 
 <p id="notice"><%= notice %></p>
 
@@ -43,5 +50,5 @@
     </tbody>
   </table>
 <% else %>
-  No images found with these aesthetics. 
+  No images found with these aesthetics.
 <% end %>
