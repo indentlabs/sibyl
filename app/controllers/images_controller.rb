@@ -7,7 +7,7 @@ class ImagesController < ApplicationController
     search_map = Hash[search_params.keys.zip(search_params.values)].reject { |k, v| !v.present?}
 
     if search_map == {}
-      @images = Image.all.includes(:character_image_qualities)
+      @images = Image.all.order('created_at desc').includes(:character_image_qualities)
     else
       matched_image_ids = CharacterImageQuality.where(search_map.except('age'))
       if search_params.key?('age')
