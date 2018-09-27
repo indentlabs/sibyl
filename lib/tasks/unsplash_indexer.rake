@@ -7,8 +7,8 @@ namespace :unsplash do
     puts "Searching for images with query #{search_query}"
     search_results.each do |image_result|
       created_image = Image.find_or_initialize_by(raw_source_url: image_result.urls.raw)
-      created_image.raw_source_width  = image.width
-      created_image.raw_source_height = image.height
+      created_image.raw_source_width  = image_result.width
+      created_image.raw_source_height = image_result.height
       created_image.thumb_source_url  = image_result.urls.thumb
       created_image.page_source_url   = image_result.links.html
       created_image.title             = image_result.title
