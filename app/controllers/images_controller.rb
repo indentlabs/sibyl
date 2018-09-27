@@ -94,12 +94,7 @@ class ImagesController < ApplicationController
     @image = Image.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def image_params
-    params.require(:image).permit(:title, :description, :bucket, :filename, :license, :author, :source_url)
-  end
-
   def search_params
-    params.permit(:skin_tone, :gender, :age, :glasses)
+    params.permit(:skin_tone, :gender, :age, :glasses, :hair_color, :hair_length)
   end
 end
